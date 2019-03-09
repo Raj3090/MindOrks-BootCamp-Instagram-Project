@@ -10,17 +10,8 @@
               android:paddingLeft="@dimen/activity_horizontal_margin"
               android:paddingRight="@dimen/activity_horizontal_margin"
               android:paddingTop="@dimen/activity_vertical_margin"
-              tools:context=".LoginActivity">
+              >
 
-    <ImageView
-            android:id="@+id/user_profile_image"
-            android:layout_width="wrap_content"
-            android:src="@drawable/ic_profile_signup"
-            android:layout_marginBottom="41dp"
-            android:layout_marginTop="70dp"
-            android:visibility="gone"
-            android:contentDescription="@string/app_logo"
-            android:layout_height="wrap_content"/>
 
     <ImageView
             android:id="@+id/app_logo"
@@ -32,34 +23,37 @@
             android:contentDescription="@string/app_logo"
             android:layout_height="58dp"/>
 
-    <EditText
-            android:id="@+id/name"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:hint="@string/prompt_name"
-            android:textSize="16sp"
-            android:padding="10dp"
-            android:visibility="gone"
-            android:background="@drawable/login_edittext_rounded_bcg"
-            android:layout_marginBottom="16dp"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:singleLine="true"/>
 
-    <EditText
-            android:id="@+id/email"
-            android:layout_width="match_parent"
-            android:layout_height="42dp"
-            android:hint="@string/prompt_email"
-            android:textSize="16sp"
-            android:padding="10dp"
-            android:background="@drawable/login_edittext_rounded_bcg"
-            android:drawableEnd="@drawable/ic_cancel"
+    <RelativeLayout
+            android:id="@+id/mail_container"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="16dp"
-            android:inputType="textEmailAddress"
-            android:maxLines="1"
-            android:singleLine="true"/>
+            android:background="@drawable/login_edittext_rounded_bcg"
+             >
 
+        <EditText
+                android:id="@+id/email"
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:hint="@string/prompt_email"
+                android:textSize="16sp"
+                android:paddingStart="10dp"
+                android:layout_toStartOf="@+id/cancel_mail"
+                android:background="@android:color/transparent"
+                android:inputType="textEmailAddress"
+                />
+
+        <ImageView
+                android:id="@+id/cancel_mail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/ic_cancel" />
+    </RelativeLayout>
 
     <EditText
             android:id="@+id/password"
