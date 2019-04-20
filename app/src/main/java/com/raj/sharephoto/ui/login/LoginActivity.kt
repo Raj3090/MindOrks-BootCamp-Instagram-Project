@@ -4,6 +4,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.raj.sharephoto.InstagramApplication
 import com.raj.sharephoto.R
 import com.raj.sharephoto.databinding.ActivityLoginBinding
 import com.raj.sharephoto.di.component.DaggerActivityComponent
@@ -27,6 +28,12 @@ class LoginActivity : AppCompatActivity() {
     }
 
     private fun insertDependencies() {
-        DaggerActivityComponent.builder().activityModule(ActivityModule(this)).build().inject(this)
+        DaggerActivityComponent
+            .builder()
+            .applicationComponent((application as InstagramApplication).applicationComponent)
+            .activityModule(ActivityModule(this))
+            .build()
+            .inject(this)
+
     }
 }
