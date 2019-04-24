@@ -12,6 +12,7 @@
     <string name="error_invalid_email">This email address is invalid</string>
     <string name="error_invalid_password">This password is too short</string>
     <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="invalid_name">Name is too short</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
         completions."
@@ -27,4 +28,10 @@
     <string name="server_connection_error">Not able to connect, please retry again</string>
     <string name="network_login_again">Please log in again</string>
 
+    <!--menu-->
+    <string name="menu_home">Home</string>
+    <string name="menu_add_photos">Add Photos</string>
+    <string name="menu_profile">Profile</string>
+
+    <string name="post_like_label">%1d Likes</string>
 </resources>

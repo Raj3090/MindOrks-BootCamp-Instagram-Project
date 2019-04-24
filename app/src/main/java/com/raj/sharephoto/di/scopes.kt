@@ -10,3 +10,7 @@ annotation class ActivityScope
 @Scope
 @Retention(AnnotationRetention.BINARY)
 annotation class FragmentScope
+
+@Scope
+@Retention(AnnotationRetention.BINARY)
+annotation class ViewModelScope

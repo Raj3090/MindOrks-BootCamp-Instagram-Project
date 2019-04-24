@@ -4,15 +4,15 @@ import android.content.Intent
 import androidx.databinding.DataBindingUtil
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import androidx.annotation.StringRes
 import androidx.lifecycle.Observer
-import com.mindorks.bootcamp.instagram.utils.common.Event
+import com.raj.sharephoto.utils.common.Event
 import com.raj.sharephoto.InstagramApplication
 import com.raj.sharephoto.R
 import com.raj.sharephoto.databinding.ActivityLoginBinding
 import com.raj.sharephoto.di.component.DaggerActivityComponent
 import com.raj.sharephoto.di.module.ActivityModule
+import com.raj.sharephoto.ui.main.MainActivity
 import com.raj.sharephoto.utils.display.Toaster
 import javax.inject.Inject
 
@@ -53,8 +53,8 @@ class LoginActivity : AppCompatActivity() {
 
         viewModel.dummyNavigation.observe(this, Observer<Event<Bundle>> {
             it.getIfNotHandled()?.run {
-//                startActivity(Intent(applicationContext, DummyActivity::class.java))
-//                finish()
+                startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
             }
         })
     }

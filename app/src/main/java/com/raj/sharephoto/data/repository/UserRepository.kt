@@ -2,7 +2,7 @@ package com.raj.sharephoto.data.repository
 
 import com.raj.sharephoto.data.local.db.DatabaseService
 import com.mindorks.bootcamp.instagram.data.local.prefs.UserPreferences
-import com.mindorks.bootcamp.instagram.data.model.User
+import com.raj.sharephoto.data.model.User
 import com.raj.sharephoto.data.remote.NetworkService
 import com.mindorks.bootcamp.instagram.data.remote.request.LoginRequest
 import com.mindorks.bootcamp.instagram.data.remote.request.SignUpRequest

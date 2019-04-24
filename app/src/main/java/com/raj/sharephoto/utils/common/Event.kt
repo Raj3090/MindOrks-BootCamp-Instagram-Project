@@ -1,4 +1,4 @@
-package com.mindorks.bootcamp.instagram.utils.common
+package com.raj.sharephoto.utils.common
 
 import java.util.concurrent.atomic.AtomicBoolean
 

@@ -1,14 +1,14 @@
 package com.raj.sharephoto.data.remote
 
-import com.mindorks.bootcamp.instagram.data.remote.Endpoints
 import com.mindorks.bootcamp.instagram.data.remote.request.LoginRequest
 import com.mindorks.bootcamp.instagram.data.remote.request.SignUpRequest
 import com.mindorks.bootcamp.instagram.data.remote.response.LoginResponse
+import com.raj.sharephoto.data.remote.response.PostListResponse
 import com.mindorks.bootcamp.instagram.data.remote.response.SignUpResponse
+import com.raj.sharephoto.data.remote.request.PostLikeModifyRequest
+import com.raj.sharephoto.data.remote.response.GeneralResponse
 import io.reactivex.Single
-import retrofit2.http.Body
-import retrofit2.http.Header
-import retrofit2.http.POST
+import retrofit2.http.*
 import javax.inject.Singleton
 
 @Singleton
@@ -42,4 +42,30 @@ interface NetworkService {
         @Body request: SignUpRequest,
         @Header(Networking.HEADER_API_KEY) apiKey: String = Networking.API_KEY
     ): Single<SignUpResponse>
+
+
+    @GET(Endpoints.HOME_POSTS_LIST)
+    fun doHomePostListCall(
+        @Query("firstPostId") firstPostId: String?,
+        @Query("lastPostId") lastPostId: String?,
+        @Header(Networking.HEADER_USER_ID) userId: String,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String,
+        @Header(Networking.HEADER_API_KEY) apiKey: String = Networking.API_KEY
+    ): Single<PostListResponse>
+
+    @PUT(Endpoints.POST_LIKE)
+    fun doPostLikeCall(
+        @Body request: PostLikeModifyRequest,
+        @Header(Networking.HEADER_USER_ID) userId: String,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String,
+        @Header(Networking.HEADER_API_KEY) apiKey: String = Networking.API_KEY
+    ): Single<GeneralResponse>
+
+    @PUT(Endpoints.POST_UNLIKE)
+    fun doPostUnlikeCall(
+        @Body request: PostLikeModifyRequest,
+        @Header(Networking.HEADER_USER_ID) userId: String,
+        @Header(Networking.HEADER_ACCESS_TOKEN) accessToken: String,
+        @Header(Networking.HEADER_API_KEY) apiKey: String = Networking.API_KEY
+    ): Single<GeneralResponse>
 }

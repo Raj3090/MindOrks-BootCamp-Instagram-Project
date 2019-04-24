@@ -1,4 +1,4 @@
-package com.mindorks.bootcamp.instagram.data.model
+package com.raj.sharephoto.data.model
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName
@@ -19,5 +19,9 @@ data class User(
 
     @Expose
     @SerializedName("accessToken")
-    val accessToken: String
+    val accessToken: String,
+
+    @Expose
+    @SerializedName("profilePicUrl")
+    val profilePicUrl: String? = null
 )

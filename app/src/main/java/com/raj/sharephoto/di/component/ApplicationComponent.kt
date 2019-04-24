@@ -7,9 +7,11 @@ import com.raj.sharephoto.data.local.db.DatabaseService
 import com.raj.sharephoto.data.remote.NetworkService
 import com.raj.sharephoto.data.repository.UserRepository
 import com.raj.sharephoto.InstagramApplication
+import com.raj.sharephoto.data.repository.PostRepository
 import com.raj.sharephoto.di.ApplicationContext
 import com.raj.sharephoto.di.module.ApplicationModule
 import com.raj.sharephoto.utils.network.NetworkHelper
+import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Component
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
@@ -44,6 +46,8 @@ interface ApplicationComponent {
 
     fun compositeDisposable(): CompositeDisposable
 
+    fun schedulerProvider(): SchedulerProvider
+
     /**---------------------------------------------------------------------------
      * Dagger will internally create UserRepository instance using constructor injection.
      * Dependency through constructor
@@ -55,4 +59,5 @@ interface ApplicationComponent {
      *---------------------------------------------------------------------------------
      */
     fun getUserRepository(): UserRepository
+    fun getPostRepository(): PostRepository
 }

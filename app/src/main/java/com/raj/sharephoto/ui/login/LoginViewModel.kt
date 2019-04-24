@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.Transformations
 import androidx.lifecycle.ViewModel
-import com.mindorks.bootcamp.instagram.utils.common.Event
+import com.raj.sharephoto.utils.common.Event
 import com.raj.sharephoto.data.repository.UserRepository
 import com.mindorks.bootcamp.instagram.utils.common.Status
 import com.raj.sharephoto.R
@@ -15,7 +15,6 @@ import com.raj.sharephoto.utils.network.NetworkHelper
 import com.raj.sharephoto.utils.common.Validator.validateEmailPassword
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
-import org.reactivestreams.Subscriber
 import javax.net.ssl.HttpsURLConnection
 
 class LoginViewModel(private val schedulerProvider: SchedulerProvider,
@@ -70,7 +69,7 @@ class LoginViewModel(private val schedulerProvider: SchedulerProvider,
                         {
                             userRepository.saveCurrentUser(it)
                             isLoggingIn.postValue(true)
-//                        dummyNavigation.postValue(Event(Bundle()))
+                            dummyNavigation.postValue(Event(Bundle()))
                         },
                         {
                             handleNetworkError(it)
