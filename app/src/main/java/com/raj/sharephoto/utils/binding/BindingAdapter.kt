@@ -1,5 +1,6 @@
 package com.raj.sharephoto.utils.binding
 
+import android.net.Uri
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter
@@ -16,10 +17,20 @@ import com.raj.sharephoto.ui.main.BottomMenuNavigationListener
 import com.raj.sharephoto.utils.common.GlideHelper
 import com.raj.sharephoto.utils.common.LoadMoreListener
 import com.raj.sharephoto.utils.common.Resource
+import java.io.File
 
 @BindingAdapter("app:loadImage")
 fun loadImage(view: ImageView, url: String?) {
     url?.let { Glide.with(view.context).load(it).into(view) }
+}
+
+
+@BindingAdapter("app:loadImageFromUri")
+fun loadImageFromUri(view: ImageView, uri: String?) {
+    uri?.let {
+        val fromFile = Uri.fromFile(File(it))
+        Glide.with(view.context).load(fromFile).into(view)
+    }
 }
 
 @BindingAdapter("app:textInputLayoutValidation")

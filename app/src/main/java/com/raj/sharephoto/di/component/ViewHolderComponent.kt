@@ -3,6 +3,7 @@ package com.raj.sharephoto.di.component
 import com.raj.sharephoto.di.ViewModelScope
 import com.raj.sharephoto.di.module.ViewHolderModule
 import com.raj.sharephoto.ui.home.post.PostItemViewHolder
+import com.raj.sharephoto.ui.photo.gallery.PhotoItemViewHolder
 import dagger.Component
 
 @ViewModelScope
@@ -13,4 +14,6 @@ import dagger.Component
 interface ViewHolderComponent {
 
     fun inject(holder: PostItemViewHolder)
+
+    fun inject(holder: PhotoItemViewHolder)
 }

@@ -1,6 +1,7 @@
 package com.raj.sharephoto.di.component
 
 import android.app.Application
+import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import com.raj.sharephoto.data.local.db.DatabaseService
@@ -13,6 +14,7 @@ import com.raj.sharephoto.di.module.ApplicationModule
 import com.raj.sharephoto.utils.network.NetworkHelper
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Component
+import dagger.Provides
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Singleton
 
@@ -47,6 +49,8 @@ interface ApplicationComponent {
     fun compositeDisposable(): CompositeDisposable
 
     fun schedulerProvider(): SchedulerProvider
+
+    fun photoContentResolver(): ContentResolver
 
     /**---------------------------------------------------------------------------
      * Dagger will internally create UserRepository instance using constructor injection.

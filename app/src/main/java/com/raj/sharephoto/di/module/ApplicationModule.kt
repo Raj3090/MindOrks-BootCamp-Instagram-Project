@@ -1,6 +1,7 @@
 package com.raj.sharephoto.di.module
 
 import android.app.Application
+import android.content.ContentResolver
 import android.content.Context
 import android.content.SharedPreferences
 import androidx.room.Room
@@ -32,6 +33,9 @@ class ApplicationModule(private val application: InstagramApplication) {
 
     @Provides
     fun provideCompositeDisposable(): CompositeDisposable = CompositeDisposable()
+
+    @Provides
+    fun providePhotoContentResolver(): ContentResolver = application.contentResolver
 
     @Provides
     fun provideSchedulerProvider(): SchedulerProvider = RxSchedulerProvider()

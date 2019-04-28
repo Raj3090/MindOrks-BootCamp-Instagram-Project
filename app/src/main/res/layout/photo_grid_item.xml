@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto">
+    <data>
+<variable name="viewModel" type="com.raj.sharephoto.ui.photo.gallery.PhotoItemViewModel"/>
+    </data>
+    <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+        <ImageView
+                android:id="@+id/iv_photo"
+                android:adjustViewBounds="true"
+                android:layout_height="200dp"
+                android:src="@drawable/instagram_logo"
+                app:loadImageFromUri="@{viewModel.uri}"
+                android:scaleType="centerCrop"
+                android:onClick="@{()->viewModel.onPhotoClick()}"
+                android:layout_margin="2dp"
+                android:layout_width="match_parent"/>
+
+    </LinearLayout>
+</layout>
