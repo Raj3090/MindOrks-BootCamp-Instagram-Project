@@ -62,18 +62,6 @@ class ProfileFragment : Fragment() {
 
     private fun setUpObservers() {
 
-       viewModel.name.observe(this , Observer {
-           it?.run {
-              name.setText(it)
-           }
-       })
-
-        viewModel.tagline.observe(this , Observer {
-            it?.run {
-                tagline.setText(it)
-            }
-        })
-
         viewModel.editNavigation.observe(this, Observer<Event<Bundle>> {
             it.getIfNotHandled()?.run {
                 startActivity(Intent(activity?.applicationContext, EditProfileActivity::class.java))

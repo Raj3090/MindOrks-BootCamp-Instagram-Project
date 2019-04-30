@@ -11,4 +11,5 @@ object Endpoints {
     const val POST_IMAGE="image"
     const val POST="instagram/post"
     const val MY_INFO="me"
+    const val MY_POST="instagram/post/my"
 }

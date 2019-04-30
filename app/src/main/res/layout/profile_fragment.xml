@@ -14,11 +14,14 @@
                 android:layout_width="86dp"
                 android:layout_height="86dp"
                 android:gravity="center"
+                app:url="@{viewModel.photoUrl}"
+                app:headers="@{viewModel.headers}"
+                app:circular="@{true}"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/ic_profile_add_pic"
+
                />
 
         <TextView
@@ -51,7 +54,7 @@
                 android:layout_marginTop="12dp"
                 style="@style/AppTheme.Body1"
                 android:layout_marginLeft="16dp"
-                android:text="@{viewModel.name}"
+                android:text="@={viewModel.name}"
                 android:layout_height="wrap_content"/>
 
 
@@ -63,7 +66,7 @@
                 android:layout_width="wrap_content"
                 android:layout_marginTop="8dp"
                 android:layout_marginLeft="16dp"
-                android:text="@{viewModel.tagline}"
+                android:text="@={viewModel.tagline}"
                 android:layout_height="wrap_content"/>
 
 

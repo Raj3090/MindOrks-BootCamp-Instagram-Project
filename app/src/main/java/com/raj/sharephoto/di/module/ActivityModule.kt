@@ -38,12 +38,12 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideEditProfileViewModel(schedulerProvider: SchedulerProvider, networkHelper:NetworkHelper,
-                              compositeDisposable:CompositeDisposable, userRepository: UserRepository
+                              compositeDisposable:CompositeDisposable, userRepository: UserRepository,postRepository: PostRepository
     ):EditProfileViewModel=
 
         ViewModelProviders.of(activity, ViewModelProviderFactory(EditProfileViewModel::class){
 
-            EditProfileViewModel(schedulerProvider,networkHelper, compositeDisposable,userRepository)
+            EditProfileViewModel(schedulerProvider,networkHelper, compositeDisposable,userRepository,postRepository)
 
         }).get(EditProfileViewModel::class.java)
 

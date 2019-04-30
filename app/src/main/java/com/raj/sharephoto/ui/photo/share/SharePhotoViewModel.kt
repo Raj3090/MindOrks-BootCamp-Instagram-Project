@@ -1,10 +1,13 @@
 package com.raj.sharephoto.ui.photo.share
 
+import android.os.Bundle
 import android.util.Log
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.raj.sharephoto.data.remote.request.PostRequest
 import com.raj.sharephoto.data.repository.PostRepository
 import com.raj.sharephoto.data.repository.UserRepository
+import com.raj.sharephoto.utils.common.Event
 import com.raj.sharephoto.utils.display.ScreenUtils.getDropboxIMGSize
 import com.raj.sharephoto.utils.display.Toaster
 import com.raj.sharephoto.utils.network.NetworkHelper
@@ -24,7 +27,7 @@ class SharePhotoViewModel(
     private val postRepository: PostRepository,
     private val userRepository: UserRepository
 ) :ViewModel(){
-
+    val profileNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
     lateinit var uri:String
 
     fun sharePhoto(){
@@ -47,10 +50,10 @@ class SharePhotoViewModel(
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
                     {
-
+                        profileNavigation.postValue(Event(Bundle()))
                     },
                     {
-
+                        profileNavigation.postValue(Event(Bundle()))
                     }
                 )
             )

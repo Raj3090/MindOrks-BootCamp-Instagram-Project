@@ -16,6 +16,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:onClick="@{()->viewModel.onClose()}"
                 android:src="@drawable/ic_close"
                 android:layout_height="wrap_content"/>
 
@@ -37,6 +38,8 @@
                 app:layout_constraintTop_toTopOf="parent"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:onClick="@{()->viewModel.onUpdate()}"
+                android:layout_marginRight="20dp"
                 android:src="@drawable/ic_tick"
                 android:layout_height="wrap_content"/>
 
@@ -49,6 +52,7 @@
                 app:layout_constraintTop_toBottomOf="@id/close"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                android:onClick="@{()->viewModel.onProfilePhotoChange()}"
                 android:src="@drawable/ic_profile_add_pic"
                 android:layout_height="80dp"/>
 
@@ -61,8 +65,9 @@
                 app:layout_constraintTop_toBottomOf="@id/profilePic"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
-                style="@style/AppTheme.Body1"
+                style="@style/AppTheme.Subtitle1"
                 android:text="Change Photo"
+                android:onClick="@{()->viewModel.onProfilePhotoChange()}"
                 android:layout_height="wrap_content"/>
 
 
@@ -87,6 +92,7 @@
                 android:layout_marginTop="16dp"
                 style="@style/AppTheme.Body1"
                 android:hint="Bio"
+                android:text="@={viewModel.nameField}"
                 android:layout_height="wrap_content"/>
 
 
@@ -111,6 +117,7 @@
                 android:layout_marginTop="16dp"
                 style="@style/AppTheme.Body1"
                 android:hint="Bio"
+                android:text="@={viewModel.taglineField}"
                 android:layout_height="wrap_content"/>
 
         <TextView

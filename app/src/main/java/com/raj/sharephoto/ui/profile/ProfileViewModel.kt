@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.raj.sharephoto.data.model.MyProfileData
+import com.raj.sharephoto.data.remote.Networking
 import com.raj.sharephoto.data.repository.UserRepository
 import com.raj.sharephoto.utils.common.Event
 import com.raj.sharephoto.utils.network.NetworkHelper
@@ -14,13 +15,13 @@ class ProfileViewModel(
     private val  schedulerProvider: SchedulerProvider,
     private val  compositeDisposable: CompositeDisposable,
     private val  networkHelper: NetworkHelper,
-    private val userRepository: UserRepository,
-     var profileData: MyProfileData?=null
+    private val userRepository: UserRepository
 ) : ViewModel() {
 
     val tagline: MutableLiveData<String> = MutableLiveData()
     val name: MutableLiveData<String> = MutableLiveData()
     val editNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
+    val photoUrl: MutableLiveData<String> = MutableLiveData()
 
     fun fetchProfileInfo(){
         if (networkHelper.isNetworkConnected()) {
@@ -32,9 +33,9 @@ class ProfileViewModel(
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
                     {
-                        profileData=it
                         tagline.setValue(it.tagline)
                         name.setValue(it.name)
+                        photoUrl.setValue(it.profilePicUrl)
                     },
                     {
 
@@ -49,5 +50,14 @@ class ProfileViewModel(
     fun navigateEdit(){
         editNavigation.setValue(Event(Bundle()))
     }
+
+    val headers: Map<String, String> = mapOf(
+        Pair(
+            Networking.HEADER_API_KEY,
+            Networking.API_KEY
+        ),
+        Pair(Networking.HEADER_USER_ID, userRepository.getCurrentUser()!!.id),
+        Pair(Networking.HEADER_ACCESS_TOKEN, userRepository.getCurrentUser()!!.accessToken)
+    )
 
 }

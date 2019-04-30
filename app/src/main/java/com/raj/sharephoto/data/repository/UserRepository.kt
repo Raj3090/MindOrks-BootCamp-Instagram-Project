@@ -9,6 +9,7 @@ import com.mindorks.bootcamp.instagram.data.remote.request.SignUpRequest
 import com.raj.sharephoto.data.model.MyProfileData
 import com.raj.sharephoto.data.remote.request.ProfileUpdateRequest
 import com.raj.sharephoto.data.remote.response.GeneralResponse
+import com.raj.sharephoto.data.remote.response.MyPostResponse
 import com.raj.sharephoto.data.remote.response.MyProfileInfoResponse
 import io.reactivex.Single
 import javax.inject.Inject
@@ -79,5 +80,11 @@ class UserRepository @Inject constructor(
     fun updateUserProfileInfo(updateRequest: ProfileUpdateRequest): Single<GeneralResponse> =
         networkService.
             doUpdateProfileInfoCall(updateRequest,userPreferences.getUserId()!!,userPreferences.getAccessToken()!!)
+
+
+    fun getMyPost(): Single<MyPostResponse> =
+        networkService.
+            doMyAllPostCall(userPreferences.getUserId()!!,userPreferences.getAccessToken()!!)
+
 
 }
