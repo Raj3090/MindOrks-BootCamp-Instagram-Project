@@ -1,4 +1,4 @@
-package com.mindorks.bootcamp.instagram.data.remote.request
+package com.raj.sharephoto.data.remote.request
 
 import com.google.gson.annotations.Expose
 import com.google.gson.annotations.SerializedName

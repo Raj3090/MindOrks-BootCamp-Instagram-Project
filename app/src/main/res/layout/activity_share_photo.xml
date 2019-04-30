@@ -17,6 +17,7 @@
                 android:text="Share"
                 android:textSize="20dp"
                 android:padding="10dp"
+                android:onClick="@{()->viewModel.sharePhoto()}"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="20dp"
                 android:layout_height="wrap_content"/>
@@ -27,6 +28,7 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="match_parent"
+                app:loadImageFromUri="@{viewModel.uri}"
                 android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

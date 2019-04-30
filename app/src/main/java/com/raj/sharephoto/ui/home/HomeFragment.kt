@@ -37,8 +37,8 @@ class HomeFragment : Fragment() {
         }
     }
 
-     @Inject
-     lateinit var viewModel: HomeViewModel
+    @Inject
+    lateinit var viewModel: HomeViewModel
 
     @Inject
     lateinit var linearLayoutManager: LinearLayoutManager
@@ -46,7 +46,7 @@ class HomeFragment : Fragment() {
     @Inject
     lateinit var postsAdapter: PostAdapter
 
-     lateinit var binding: HomeFragmentBinding
+    lateinit var binding: HomeFragmentBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies()
@@ -76,11 +76,11 @@ class HomeFragment : Fragment() {
 
 
     private fun setUpObserver() {
-      viewModel.post.observe(this, Observer {
-          it.data?.run {
-              postsAdapter.appendData(this)
-          }
-      })
+        viewModel.post.observe(this, Observer {
+            it.data?.run {
+                postsAdapter.appendData(this)
+            }
+        })
 
         viewModel.messageString.observe(this, Observer {
             it.data?.run { showMessage(this) }

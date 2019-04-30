@@ -1,11 +1,16 @@
 package com.raj.sharephoto.ui.photo.gallery
 
+import android.content.Intent
+import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.RecyclerView
 import com.raj.sharephoto.InstagramApplication
 import com.raj.sharephoto.data.model.Post
 import com.raj.sharephoto.databinding.PhotoGridItemBinding
 import com.raj.sharephoto.di.component.DaggerViewHolderComponent
 import com.raj.sharephoto.di.module.ViewHolderModule
+import com.raj.sharephoto.ui.main.MainActivity
+import com.raj.sharephoto.ui.photo.share.SharePhotoActivity
+import com.raj.sharephoto.utils.display.Toaster
 import javax.inject.Inject
 
 class PhotoItemViewHolder(val binding: PhotoGridItemBinding) :RecyclerView.ViewHolder(binding.root) {
@@ -22,6 +27,18 @@ class PhotoItemViewHolder(val binding: PhotoGridItemBinding) :RecyclerView.ViewH
             .viewHolderModule(ViewHolderModule(this))
             .build()
             .inject(this)
+
+
+        viewModel.imageUri = {
+            val intent=Intent(binding.root.context, SharePhotoActivity::class.java)
+            intent.putExtra("ImageUri",it)
+            binding.root.context.startActivity(intent)
+        }
+
+
+
+
+
     }
 
 

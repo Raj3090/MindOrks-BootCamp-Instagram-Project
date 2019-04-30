@@ -5,7 +5,11 @@ import com.raj.sharephoto.data.local.db.DatabaseService
 import com.raj.sharephoto.data.model.Post
 import com.raj.sharephoto.data.remote.NetworkService
 import com.raj.sharephoto.data.remote.request.PostLikeModifyRequest
+import com.raj.sharephoto.data.remote.request.PostRequest
+import com.raj.sharephoto.data.remote.response.PostResponse
+import com.raj.sharephoto.data.remote.response.UploadPhotoResponse
 import io.reactivex.Single
+import okhttp3.MultipartBody
 import javax.inject.Inject
 
 class PostRepository @Inject constructor(
@@ -53,6 +57,23 @@ class PostRepository @Inject constructor(
             }
             return@map post
         }
+    }
+
+    fun uploadPostImage(user: User,body: MultipartBody.Part): Single<UploadPhotoResponse> {
+        return networkService.doPostUploadImageCall(
+            body,
+            user.id,
+            user.accessToken
+        )
+    }
+
+
+    fun uploadPost(user: User,body: PostRequest): Single<PostResponse> {
+        return networkService.doUploadPostCall(
+            body,
+            user.id,
+            user.accessToken
+        )
     }
 
 }

@@ -13,7 +13,6 @@ import com.raj.sharephoto.ui.home.post.PostAdapter
 import com.raj.sharephoto.ui.photo.PhotoViewModel
 import com.raj.sharephoto.ui.photo.gallery.PhotoAdapter
 import com.raj.sharephoto.ui.profile.ProfileViewModel
-import com.raj.sharephoto.ui.signup.SignUpViewModel
 import com.raj.sharephoto.utils.network.NetworkHelper
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Module
@@ -33,12 +32,17 @@ class FragmentModule(private val fragment: Fragment) {
 
         }).get(PhotoViewModel::class.java)
 
+
     @Provides
-    fun provideProfileViewModel():ProfileViewModel{
+    fun provideProfileViewModel(schedulerProvider: SchedulerProvider, networkHelper: NetworkHelper,
+                               compositeDisposable: CompositeDisposable, userRepository: UserRepository
+    ): ProfileViewModel =
 
-        return ProfileViewModel()
+        ViewModelProviders.of(fragment, ViewModelProviderFactory(ProfileViewModel::class){
 
-    }
+            ProfileViewModel(schedulerProvider,compositeDisposable,networkHelper,userRepository)
+
+        }).get(ProfileViewModel::class.java)
 
 
     @Provides

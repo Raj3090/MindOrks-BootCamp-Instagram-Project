@@ -4,8 +4,12 @@ import com.raj.sharephoto.data.local.db.DatabaseService
 import com.mindorks.bootcamp.instagram.data.local.prefs.UserPreferences
 import com.raj.sharephoto.data.model.User
 import com.raj.sharephoto.data.remote.NetworkService
-import com.mindorks.bootcamp.instagram.data.remote.request.LoginRequest
+import com.raj.sharephoto.data.remote.request.LoginRequest
 import com.mindorks.bootcamp.instagram.data.remote.request.SignUpRequest
+import com.raj.sharephoto.data.model.MyProfileData
+import com.raj.sharephoto.data.remote.request.ProfileUpdateRequest
+import com.raj.sharephoto.data.remote.response.GeneralResponse
+import com.raj.sharephoto.data.remote.response.MyProfileInfoResponse
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -63,4 +67,17 @@ class UserRepository @Inject constructor(
                     it.accessToken
                 )
             }
+
+
+    fun getUserProfileInfo(): Single<MyProfileData> =
+        networkService.
+            doMyProfileInfoCall(userPreferences.getUserId()!!,userPreferences.getAccessToken()!!)
+            .map {
+               it.data
+            }
+
+    fun updateUserProfileInfo(updateRequest: ProfileUpdateRequest): Single<GeneralResponse> =
+        networkService.
+            doUpdateProfileInfoCall(updateRequest,userPreferences.getUserId()!!,userPreferences.getAccessToken()!!)
+
 }
