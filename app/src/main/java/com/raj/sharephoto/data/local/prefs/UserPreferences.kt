@@ -1,4 +1,4 @@
-package com.mindorks.bootcamp.instagram.data.local.prefs
+package com.raj.sharephoto.data.local.prefs
 
 import android.content.SharedPreferences
 import javax.inject.Inject
@@ -12,6 +12,7 @@ class UserPreferences @Inject constructor(private val prefs: SharedPreferences) 
         const val KEY_USER_NAME = "PREF_KEY_USER_NAME"
         const val KEY_USER_EMAIL = "PREF_KEY_USER_EMAIL"
         const val KEY_ACCESS_TOKEN = "PREF_KEY_ACCESS_TOKEN"
+        const val KEY_USER_PROFILE_URL = "PREF_KEY_USER_PROFILE_URL"
     }
 
     fun getUserId(): String? =
@@ -49,4 +50,14 @@ class UserPreferences @Inject constructor(private val prefs: SharedPreferences) 
 
     fun removeAccessToken() =
         prefs.edit().remove(KEY_ACCESS_TOKEN).apply()
+
+
+    fun getUserProfileUrl(): String? =
+        prefs.getString(KEY_USER_PROFILE_URL, null)
+
+    fun setUserProfileUrl(userProfileUrl: String) =
+        prefs.edit().putString(KEY_USER_PROFILE_URL, userProfileUrl).apply()
+
+    fun removeUserProfileUrl() =
+        prefs.edit().remove(KEY_USER_PROFILE_URL).apply()
 }

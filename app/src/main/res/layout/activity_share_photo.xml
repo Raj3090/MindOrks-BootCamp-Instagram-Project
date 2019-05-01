@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
         <variable name="viewModel" type="com.raj.sharephoto.ui.photo.share.SharePhotoViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -29,6 +30,17 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="match_parent"
                 app:loadImageFromUri="@{viewModel.uri}"
+                android:layout_height="wrap_content"/>
+
+
+        <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="@{safeUnbox(viewModel.isPosting)  ? View.VISIBLE : View.GONE}"
                 android:layout_height="wrap_content"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

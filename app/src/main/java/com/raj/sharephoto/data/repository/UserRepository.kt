@@ -1,7 +1,7 @@
 package com.raj.sharephoto.data.repository
 
 import com.raj.sharephoto.data.local.db.DatabaseService
-import com.mindorks.bootcamp.instagram.data.local.prefs.UserPreferences
+import com.raj.sharephoto.data.local.prefs.UserPreferences
 import com.raj.sharephoto.data.model.User
 import com.raj.sharephoto.data.remote.NetworkService
 import com.raj.sharephoto.data.remote.request.LoginRequest
@@ -10,7 +10,6 @@ import com.raj.sharephoto.data.model.MyProfileData
 import com.raj.sharephoto.data.remote.request.ProfileUpdateRequest
 import com.raj.sharephoto.data.remote.response.GeneralResponse
 import com.raj.sharephoto.data.remote.response.MyPostResponse
-import com.raj.sharephoto.data.remote.response.MyProfileInfoResponse
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -27,11 +26,26 @@ class UserRepository @Inject constructor(
         userPreferences.setAccessToken(user.accessToken)
     }
 
+    fun saveUserProfileUrl(userProfileUrl: String) {
+        userPreferences.setUserProfileUrl(userProfileUrl)
+    }
+
+    fun getUserProfileUrl() :String{
+      return  userPreferences.getUserProfileUrl()!!
+    }
+
+    fun saveUserName(userName: String) {
+        userPreferences.setUserName(userName)
+    }
+
+
+
     fun removeCurrentUser() {
         userPreferences.removeUserId()
         userPreferences.removeUserName()
         userPreferences.removeUserEmail()
         userPreferences.removeAccessToken()
+        userPreferences.removeUserProfileUrl()
     }
 
     fun getCurrentUser(): User? {

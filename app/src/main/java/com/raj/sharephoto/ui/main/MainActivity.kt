@@ -1,5 +1,6 @@
 package com.raj.sharephoto.ui.main
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -14,15 +15,27 @@ import com.raj.sharephoto.di.module.ActivityModule
 import com.raj.sharephoto.ui.home.HomeFragment
 import com.raj.sharephoto.ui.photo.PhotoFragment
 import com.raj.sharephoto.ui.profile.ProfileFragment
+import com.raj.sharephoto.utils.common.Event
+import com.raj.sharephoto.utils.rx.RxBus
+import com.raj.sharephoto.utils.rx.SchedulerProvider
 import javax.inject.Inject
+import com.raj.sharephoto.utils.rx.events.PostSubmit
+import io.reactivex.functions.Consumer
+
 
 class MainActivity : AppCompatActivity() {
 
     @Inject
     lateinit var mainViewModel: MainViewModel
 
+    @Inject
+    lateinit var schedulerProvider: SchedulerProvider
+
     lateinit var binding: ActivityMainBinding
     private var activeFragment: Fragment? = null
+
+     var updatePostList:Boolean=false
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         injectDependencies();
@@ -32,7 +45,7 @@ class MainActivity : AppCompatActivity() {
         binding.viewModel=mainViewModel
         setUpOberver()
         setupView()
-        mainViewModel.onViewCreated()
+
 
     }
 
@@ -48,6 +61,7 @@ class MainActivity : AppCompatActivity() {
                 }
             }
         })
+
 
     }
 
@@ -86,6 +100,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
 
         activeFragment = fragment
+
+        if(updatePostList) {
+            (activeFragment as HomeFragment).viewModel.onViewCreated()
+            updatePostList=false
+        }
     }
 
     private fun showProfile() {
@@ -107,6 +126,9 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
 
         activeFragment = fragment
+
+
+
     }
 
     private fun showAddPhoto() {
@@ -128,5 +150,11 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
 
         activeFragment = fragment
+    }
+
+    override fun onNewIntent(intent: Intent?) {
+        super.onNewIntent(intent)
+        updatePostList=true
+        findViewById<BottomNavigationView>(R.id.bottomNavigation).selectedItemId=R.id.itemHome
     }
 }

@@ -12,6 +12,7 @@ import com.raj.sharephoto.ui.photo.share.SharePhotoViewModel
 import com.raj.sharephoto.ui.profile.edit.EditProfileViewModel
 import com.raj.sharephoto.ui.signup.SignUpViewModel
 import com.raj.sharephoto.ui.splash.SplashViewModel
+import com.raj.sharephoto.utils.rx.RxBus
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Module
 import dagger.Provides
@@ -76,12 +77,12 @@ class ActivityModule(private val activity: AppCompatActivity) {
 
     @Provides
     fun provideSharePhotoViewModelViewModel(schedulerProvider: SchedulerProvider, networkHelper:NetworkHelper,
-                                            compositeDisposable:CompositeDisposable, postRepository: PostRepository, userRepository: UserRepository
+                                            compositeDisposable:CompositeDisposable, postRepository: PostRepository, userRepository: UserRepository,rxBus: RxBus
     ): SharePhotoViewModel =
 
         ViewModelProviders.of(activity, ViewModelProviderFactory(SharePhotoViewModel::class){
 
-            SharePhotoViewModel(schedulerProvider,networkHelper, compositeDisposable,postRepository,userRepository)
+            SharePhotoViewModel(schedulerProvider,networkHelper, compositeDisposable,postRepository,userRepository,rxBus)
 
         }).get(SharePhotoViewModel::class.java)
 

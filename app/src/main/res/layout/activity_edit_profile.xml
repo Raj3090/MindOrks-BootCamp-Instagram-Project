@@ -2,6 +2,7 @@
 <layout xmlns:android="http://schemas.android.com/apk/res/android" xmlns:tools="http://schemas.android.com/tools"
         xmlns:app="http://schemas.android.com/apk/res-auto">
     <data>
+        <import type="android.view.View"/>
 <variable name="viewModel" type="com.raj.sharephoto.ui.profile.edit.EditProfileViewModel"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -52,6 +53,9 @@
                 app:layout_constraintTop_toBottomOf="@id/close"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
+                app:url="@{viewModel.imageUrlField}"
+                app:headers="@{viewModel.headers}"
+                app:circular="@{true}"
                 android:onClick="@{()->viewModel.onProfilePhotoChange()}"
                 android:src="@drawable/ic_profile_add_pic"
                 android:layout_height="80dp"/>
@@ -140,7 +144,7 @@
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="16dp"
                 style="@style/AppTheme.Caption"
-                android:text="Email Address:"
+                android:text="@={viewModel.emailField}"
                 android:layout_height="wrap_content"/>
 
 
@@ -154,6 +158,17 @@
                 android:layout_marginTop="16dp"
                 style="@style/AppTheme.Body2"
                 android:text="Private Info"
+                android:layout_height="wrap_content"/>
+
+
+        <ProgressBar
+                android:id="@+id/progressbar"
+                android:layout_width="wrap_content"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:visibility="@{safeUnbox(viewModel.isUpdating)  ? View.VISIBLE : View.GONE}"
                 android:layout_height="wrap_content"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>

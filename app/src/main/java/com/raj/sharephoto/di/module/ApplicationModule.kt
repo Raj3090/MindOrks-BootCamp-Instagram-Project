@@ -12,6 +12,7 @@ import com.raj.sharephoto.BuildConfig
 import com.raj.sharephoto.InstagramApplication
 import com.raj.sharephoto.di.ApplicationContext
 import com.raj.sharephoto.utils.network.NetworkHelper
+import com.raj.sharephoto.utils.rx.RxBus
 import com.raj.sharephoto.utils.rx.RxSchedulerProvider
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Module
@@ -66,4 +67,8 @@ class ApplicationModule(private val application: InstagramApplication) {
     @Singleton
     @Provides
     fun provideNetworkHelper(): NetworkHelper = NetworkHelper(application)
+
+    @Singleton
+    @Provides
+    fun provideRxBus(): RxBus = RxBus()
 }

@@ -11,7 +11,9 @@ import com.raj.sharephoto.utils.common.Event
 import com.raj.sharephoto.utils.display.ScreenUtils.getDropboxIMGSize
 import com.raj.sharephoto.utils.display.Toaster
 import com.raj.sharephoto.utils.network.NetworkHelper
+import com.raj.sharephoto.utils.rx.RxBus
 import com.raj.sharephoto.utils.rx.SchedulerProvider
+import com.raj.sharephoto.utils.rx.events.PostSubmit
 import io.reactivex.disposables.CompositeDisposable
 import okhttp3.MediaType
 import okhttp3.RequestBody
@@ -25,9 +27,12 @@ class SharePhotoViewModel(
     private val networkHelper: NetworkHelper,
     private val compositeDisposable: CompositeDisposable,
     private val postRepository: PostRepository,
-    private val userRepository: UserRepository
+    private val userRepository: UserRepository,
+    private val rxBus: RxBus
 ) :ViewModel(){
     val profileNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
+    val isPosting: MutableLiveData<Boolean> = MutableLiveData()
+
     lateinit var uri:String
 
     fun sharePhoto(){
@@ -37,6 +42,7 @@ class SharePhotoViewModel(
 
         val currentUser = userRepository.getCurrentUser()!!
         if (networkHelper.isNetworkConnected()) {
+            isPosting.postValue(true)
             val call =
                 postRepository.uploadPostImage(currentUser,body)
                     .flatMap {
@@ -50,9 +56,12 @@ class SharePhotoViewModel(
                 .observeOn(schedulerProvider.ui())
                 .subscribe(
                     {
+                        isPosting.postValue(false)
                         profileNavigation.postValue(Event(Bundle()))
+
                     },
                     {
+                        isPosting.postValue(false)
                         profileNavigation.postValue(Event(Bundle()))
                     }
                 )

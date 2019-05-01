@@ -6,9 +6,10 @@ import androidx.appcompat.app.AlertDialog
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
+import com.raj.sharephoto.ui.photo.PhotoFragment
 
 
-class ManagePermissions(val activity: FragmentActivity, val list: List<String>, val code:Int) {
+class ManagePermissions(val fragemnt: PhotoFragment, val list: List<String>, val code:Int) {
 
     // Check permissions at runtime
 
@@ -18,7 +19,7 @@ class ManagePermissions(val activity: FragmentActivity, val list: List<String>, 
         // PERMISSION_DENIED : Constant Value: -1
         var counter = 0;
         for (permission in list) {
-            counter += ContextCompat.checkSelfPermission(activity, permission)
+            counter += ContextCompat.checkSelfPermission(fragemnt.requireContext(), permission)
         }
         return counter
     }
@@ -27,7 +28,7 @@ class ManagePermissions(val activity: FragmentActivity, val list: List<String>, 
     // Find the first denied permission
     private fun deniedPermission(): String {
         for (permission in list) {
-            if (ContextCompat.checkSelfPermission(activity, permission)
+            if (ContextCompat.checkSelfPermission(fragemnt.requireContext(), permission)
                 == PackageManager.PERMISSION_DENIED) return permission
         }
         return ""
@@ -36,7 +37,7 @@ class ManagePermissions(val activity: FragmentActivity, val list: List<String>, 
 
     // Show alert dialog to request permissions
      fun showAlert() {
-        val builder = AlertDialog.Builder(activity)
+        val builder = AlertDialog.Builder(fragemnt.requireContext())
         builder.setTitle("Need permission(s)")
         builder.setMessage("Some permissions are required to do the task.")
         builder.setPositiveButton("OK", { dialog, which -> requestPermissions() })
@@ -49,11 +50,11 @@ class ManagePermissions(val activity: FragmentActivity, val list: List<String>, 
     // Request the permissions at run time
     private fun requestPermissions() {
         val permission = deniedPermission()
-        if (ActivityCompat.shouldShowRequestPermissionRationale(activity, permission)) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(fragemnt.requireActivity(), permission)) {
             // Show an explanation asynchronously
-            Toaster.show(activity,"Should show an explanation.")
+            Toaster.show(fragemnt.requireContext(),"Should show an explanation.")
         } else {
-            ActivityCompat.requestPermissions(activity, list.toTypedArray(), code)
+            ActivityCompat.requestPermissions(fragemnt.requireActivity(), list.toTypedArray(), code)
         }
     }
 

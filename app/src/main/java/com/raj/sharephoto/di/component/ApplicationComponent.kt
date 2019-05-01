@@ -12,6 +12,7 @@ import com.raj.sharephoto.data.repository.PostRepository
 import com.raj.sharephoto.di.ApplicationContext
 import com.raj.sharephoto.di.module.ApplicationModule
 import com.raj.sharephoto.utils.network.NetworkHelper
+import com.raj.sharephoto.utils.rx.RxBus
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Component
 import dagger.Provides
@@ -51,6 +52,8 @@ interface ApplicationComponent {
     fun schedulerProvider(): SchedulerProvider
 
     fun photoContentResolver(): ContentResolver
+
+    fun provideRxBus(): RxBus
 
     /**---------------------------------------------------------------------------
      * Dagger will internally create UserRepository instance using constructor injection.

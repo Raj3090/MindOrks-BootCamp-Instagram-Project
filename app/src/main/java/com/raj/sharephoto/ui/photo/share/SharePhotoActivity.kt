@@ -1,5 +1,6 @@
 package com.raj.sharephoto.ui.photo.share
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.databinding.DataBindingUtil
@@ -9,6 +10,7 @@ import com.raj.sharephoto.R
 import com.raj.sharephoto.databinding.ActivitySharePhotoBinding
 import com.raj.sharephoto.di.component.DaggerActivityComponent
 import com.raj.sharephoto.di.module.ActivityModule
+import com.raj.sharephoto.ui.main.MainActivity
 import com.raj.sharephoto.utils.common.Event
 import javax.inject.Inject
 
@@ -38,6 +40,7 @@ class SharePhotoActivity : AppCompatActivity() {
 
         viewModel.profileNavigation.observe(this, Observer<Event<Bundle>> {
             it.getIfNotHandled()?.run {
+                startActivity(Intent(applicationContext, MainActivity::class.java))
                 finish()
             }
         })

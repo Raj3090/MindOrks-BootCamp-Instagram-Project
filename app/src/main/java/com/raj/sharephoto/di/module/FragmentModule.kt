@@ -13,6 +13,7 @@ import com.raj.sharephoto.ui.home.post.PostAdapter
 import com.raj.sharephoto.ui.photo.PhotoViewModel
 import com.raj.sharephoto.ui.photo.gallery.PhotoAdapter
 import com.raj.sharephoto.ui.profile.ProfileViewModel
+import com.raj.sharephoto.ui.profile.post.MyPostAdapter
 import com.raj.sharephoto.utils.network.NetworkHelper
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import dagger.Module
@@ -63,6 +64,9 @@ class FragmentModule(private val fragment: Fragment) {
 
     @Provides
     fun providePostsAdapter(): PostAdapter = PostAdapter(ArrayList())
+
+    @Provides
+    fun provideMyPostsAdapter(): MyPostAdapter = MyPostAdapter(ArrayList())
 
 
     @Provides

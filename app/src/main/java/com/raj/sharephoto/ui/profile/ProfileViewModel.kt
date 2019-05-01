@@ -4,9 +4,11 @@ import android.os.Bundle
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.raj.sharephoto.data.model.MyProfileData
+import com.raj.sharephoto.data.model.UploadedPostData
 import com.raj.sharephoto.data.remote.Networking
 import com.raj.sharephoto.data.repository.UserRepository
 import com.raj.sharephoto.utils.common.Event
+import com.raj.sharephoto.utils.common.Resource
 import com.raj.sharephoto.utils.network.NetworkHelper
 import com.raj.sharephoto.utils.rx.SchedulerProvider
 import io.reactivex.disposables.CompositeDisposable
@@ -23,6 +25,8 @@ class ProfileViewModel(
     val editNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
     val photoUrl: MutableLiveData<String> = MutableLiveData()
 
+    val urls: MutableLiveData<Resource<List<UploadedPostData>>> = MutableLiveData<Resource<List<UploadedPostData>>>()
+
     fun fetchProfileInfo(){
         if (networkHelper.isNetworkConnected()) {
             val call =
@@ -36,6 +40,27 @@ class ProfileViewModel(
                         tagline.setValue(it.tagline)
                         name.setValue(it.name)
                         photoUrl.setValue(it.profilePicUrl)
+
+                        it.profilePicUrl?.let {
+                            userRepository.saveUserProfileUrl(it)
+                        }
+
+                    },
+                    {
+
+                    }
+                )
+            )
+
+            val postcall =
+                userRepository.getMyPost()
+
+            compositeDisposable.add(postcall
+                .subscribeOn(schedulerProvider.io())
+                .observeOn(schedulerProvider.ui())
+                .subscribe(
+                    {
+                        urls.postValue(Resource.success(it.data))
                     },
                     {
 
