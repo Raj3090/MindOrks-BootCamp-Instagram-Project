@@ -102,7 +102,7 @@ class MainActivity : AppCompatActivity() {
         activeFragment = fragment
 
         if(updatePostList) {
-            (activeFragment as HomeFragment).viewModel.onViewCreated()
+            (activeFragment as HomeFragment).viewModel.loadNewPosts()
             updatePostList=false
         }
     }

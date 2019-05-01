@@ -77,6 +77,11 @@ class HomeViewModel(
         if (checkInternetConnectionWithMessage()) paginator.onNext(Pair(firstPostId, lastPostId))
     }
 
+
+     fun loadNewPosts() {
+        if (checkInternetConnectionWithMessage()) paginator.onNext(Pair(null, null))
+    }
+
     private fun checkInternetConnectionWithMessage(): Boolean =
         if (networkHelper.isNetworkConnected()) {
             true
