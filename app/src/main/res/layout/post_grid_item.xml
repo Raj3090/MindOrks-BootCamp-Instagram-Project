@@ -10,7 +10,7 @@
         <ImageView
                 android:id="@+id/iv_photo"
                 android:adjustViewBounds="true"
-                android:layout_height="200dp"
+                android:layout_height="100dp"
                 android:scaleType="centerCrop"
                 app:loadImage="@{viewModel.url}"
                 android:layout_margin="2dp"
