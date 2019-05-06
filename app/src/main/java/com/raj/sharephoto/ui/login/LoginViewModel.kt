@@ -31,7 +31,8 @@ class LoginViewModel(private val schedulerProvider: SchedulerProvider,
 
     val messageStringId: MutableLiveData<Resource<Int>> = MutableLiveData()
     val messageString: MutableLiveData<Resource<String>> = MutableLiveData()
-    val dummyNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
+    val mainNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
+    val signUpNavigation: MutableLiveData<Event<Bundle>> = MutableLiveData()
 
     val emailValidation: LiveData<Resource<Int>> =
         transformValidation(Validator.Validation.Field.EMAIL)
@@ -69,7 +70,7 @@ class LoginViewModel(private val schedulerProvider: SchedulerProvider,
                         {
                             userRepository.saveCurrentUser(it)
                             isLoggingIn.postValue(true)
-                            dummyNavigation.postValue(Event(Bundle()))
+                            mainNavigation.postValue(Event(Bundle()))
                         },
                         {
                             handleNetworkError(it)
@@ -83,6 +84,10 @@ class LoginViewModel(private val schedulerProvider: SchedulerProvider,
 
         }
 
+    }
+
+    fun goToLoginScreen(){
+        signUpNavigation.postValue(Event(Bundle()))
     }
 
     private fun handleNetworkError(err: Throwable?) =

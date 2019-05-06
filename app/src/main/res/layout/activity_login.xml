@@ -49,6 +49,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.button.MaterialButton
+                android:id="@+id/emailBtn"
                 android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -56,6 +57,28 @@
                 android:text="@string/action_login"
                 android:onClick="@{()->viewModel.doLogin()}"
                 app:layout_constraintTop_toBottomOf="@+id/password"
+                android:layout_height="wrap_content"/>
+
+        <TextView android:id="@+id/already_signed"
+                  android:layout_width="wrap_content"
+                  android:text="OR"
+                  android:textSize="20sp"
+                  android:layout_marginTop="16dp"
+                  app:layout_constraintLeft_toLeftOf="parent"
+                  app:layout_constraintRight_toRightOf="parent"
+                  app:layout_constraintTop_toBottomOf="@+id/emailBtn"
+                  android:layout_height="wrap_content"/>
+
+
+        <com.google.android.material.button.MaterialButton
+                android:id="@+id/login"
+                android:layout_width="match_parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                android:layout_marginTop="20dp"
+                android:text="@string/action_sign_up"
+                android:onClick="@{()->viewModel.goToLoginScreen()}"
+                app:layout_constraintTop_toBottomOf="@+id/already_signed"
                 android:layout_height="wrap_content"/>
 
         <ProgressBar

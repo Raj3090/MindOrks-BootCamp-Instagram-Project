@@ -13,6 +13,7 @@ import com.raj.sharephoto.databinding.ActivityLoginBinding
 import com.raj.sharephoto.di.component.DaggerActivityComponent
 import com.raj.sharephoto.di.module.ActivityModule
 import com.raj.sharephoto.ui.main.MainActivity
+import com.raj.sharephoto.ui.signup.SignUpActivity
 import com.raj.sharephoto.utils.display.Toaster
 import javax.inject.Inject
 
@@ -43,6 +44,7 @@ class LoginActivity : AppCompatActivity() {
 
     }
     private fun setupObservers() {
+
         viewModel.messageString.observe(this, Observer {
             it.data?.run { showMessage(this) }
         })
@@ -51,9 +53,16 @@ class LoginActivity : AppCompatActivity() {
             it.data?.run { showMessage(this) }
         })
 
-        viewModel.dummyNavigation.observe(this, Observer<Event<Bundle>> {
+        viewModel.mainNavigation.observe(this, Observer<Event<Bundle>> {
             it.getIfNotHandled()?.run {
                 startActivity(Intent(applicationContext, MainActivity::class.java))
+                finish()
+            }
+        })
+
+        viewModel.signUpNavigation.observe(this, Observer<Event<Bundle>> {
+            it.getIfNotHandled()?.run {
+                startActivity(Intent(applicationContext, SignUpActivity::class.java))
                 finish()
             }
         })

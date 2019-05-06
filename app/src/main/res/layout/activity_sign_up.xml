@@ -18,6 +18,8 @@
                 android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/email"
+                android:layout_marginBottom="16dp"
                 android:hint="@string/prompt_name"
                 app:textInputLayoutValidation="@{viewModel.nameValidation}"
                 android:layout_height="wrap_content">
@@ -33,8 +35,8 @@
                 android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/name"
-                app:layout_constraintBottom_toTopOf="@id/password"
+                app:layout_constraintTop_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="parent"
                 android:hint="@string/prompt_email"
                 app:textInputLayoutValidation="@{viewModel.emailValidation}"
                 android:layout_height="wrap_content">
@@ -51,8 +53,8 @@
                 android:layout_width="match_parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/email"
+                android:layout_marginTop="16dp"
                 android:hint="@string/prompt_password"
                 app:textInputLayoutValidation="@{viewModel.passwordValidation}"
                 android:layout_height="wrap_content">
